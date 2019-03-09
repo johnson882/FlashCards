@@ -3,14 +3,14 @@ import {
     View,
     Text,
     StyleSheet,
-  
+
 } from "react-native";
 
 class Home extends Component {
 
     static navigationOptions = {
         header: null
-    }
+    } // this hides the header for navigation 
 
     render() {
         return (
