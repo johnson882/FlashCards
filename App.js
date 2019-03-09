@@ -1,15 +1,24 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Home from './components/deck-home'
+import {createStackNavigator, createAppContainer} from 'react-navigation';
 
-export default class App extends React.Component {
+
+
+class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>This is the Epic study app, Great Job!</Text>
-      </View>
+
+        <AppNavigator />
+
     );
   }
 }
+
+const AppNavigator = createStackNavigator({
+  Home
+
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -17,5 +26,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+
+
+
+
+
   },
 });
+
+
+
+export default createAppContainer(AppNavigator);
