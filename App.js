@@ -1,6 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Home from './components/deck-home'
+import AddDeck from './components/add_deck'
+import DeleteDeck from './components/delete_deck'
+import Deck from './components/deck'
+import AddCard from './components/add_card'
+import Card from './components/card'
+import DeleteCard from './components/delete_card'
+
+
 import {createStackNavigator, createAppContainer} from 'react-navigation';
 
 
@@ -16,7 +24,13 @@ class App extends React.Component {
 }
 
 const AppNavigator = createStackNavigator({
-  Home
+  Home,
+  AddDeck,
+  DeleteDeck,
+  Deck,
+  AddCard,
+  Card,
+  DeleteCard
 
 });
 

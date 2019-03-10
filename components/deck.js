@@ -7,10 +7,10 @@ import {
 
 } from "react-native";
 
-class Home extends Component {
+class Deck extends Component {
 
     static navigationOptions = {
-      title: "Flash Cards"
+      title: "Deck 1"
 
     } // this hides the header for navigation
 
@@ -19,15 +19,16 @@ class Home extends Component {
 
 
             <View style={styles.container}>
-              <Button title="Deck 1 (example)" onPress={() => this.props.navigation.navigate('Deck')}/>
-            <Button title="Add Deck" onPress={() => this.props.navigation.navigate('AddDeck')}/>
-            <Button title="Delete Deck" onPress={() => this.props.navigation.navigate('DeleteDeck')}/>
+            <Button title="Take test" onPress={() => this.props.navigation.navigate('Card')}/>
+
+            <Button title="Add Question" onPress={() => this.props.navigation.navigate('AddCard')}/>
+            <Button title="Delete Question" onPress={() => this.props.navigation.navigate('DeleteCard')}/>
 
             </View>
         );
     }
 }
-export default Home;
+export default Deck;
 
 const styles = StyleSheet.create({
     container: {
