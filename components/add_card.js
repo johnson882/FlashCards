@@ -9,6 +9,13 @@ import {
 
 class AddCard extends Component {
 
+  constructor(props) {
+     super(props);
+     this.state = {
+       text: 'Name',
+    };
+   }
+
     static navigationOptions = {
        title: 'Add Card',
     } // this hides the header for navigation
