@@ -1,6 +1,6 @@
 import React from 'react';
 import {   TextInput, StyleSheet } from 'react-native';
-
+// not needed because it would be hard to add onChange to this component
 export default function  InputField (props) {
 
 
@@ -14,7 +14,7 @@ export default function  InputField (props) {
        padding = {10}
        placeholder= {props.placeholder}
        placeholderTextColor = {'green'}
-       
+
 
       padding = {props.padding}
       style = {props.style}
