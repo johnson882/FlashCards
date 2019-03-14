@@ -4,7 +4,8 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "test": "jest"
   },
   "dependencies": {
     "braces": "^2.3.2",
@@ -18,9 +19,5 @@
     "jest": "^24.5.0"
   },
 
-  "scripts": {
-    "test": "jest"
-  }
-,
   "private": true
 }
