@@ -4,7 +4,8 @@ import {
     Text,
     StyleSheet,
     Button,
-    TextInput
+    TextInput,
+    ScrollView
 
 } from "react-native";
 
@@ -22,7 +23,8 @@ class AddDeck extends Component {
 
     render() {
         return (
-            <View style={{
+
+            <ScrollView style={{
        backgroundColor: this.state.text,
        borderBottomColor: '#000000',
 
@@ -34,7 +36,7 @@ class AddDeck extends Component {
     style={{height: 40, borderColor: 'gray', borderWidth: 1}}
     onChangeText={(text) => this.setState({text})}
 
-    multiline = {true}
+    multiline = {false}
      numberOfLines = {4}
      margin = {50}
      padding = {10}
@@ -49,7 +51,7 @@ class AddDeck extends Component {
 
 
               <Text>{this.state.text}</Text>
-            </View>
+            </ScrollView>
         );
     }
 }

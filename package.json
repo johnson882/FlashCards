@@ -14,7 +14,13 @@
     "react-navigation": "^3.3.2"
   },
   "devDependencies": {
-    "babel-preset-expo": "^5.0.0"
+    "babel-preset-expo": "^5.0.0",
+    "jest": "^24.5.0"
   },
+
+  "scripts": {
+    "test": "jest"
+  }
+,
   "private": true
 }

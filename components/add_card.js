@@ -4,7 +4,8 @@ import {
     Text,
     StyleSheet,
     Button,
-    TextInput
+    TextInput,
+    ScrollView
 
 } from "react-native";
 
@@ -25,8 +26,8 @@ class AddCard extends Component {
 
     render() {
         return (
-            <View style={{
-       
+            <ScrollView style={{
+
        borderBottomColor: '#000000'}}>
             <Text>Question:</Text>
 
@@ -74,7 +75,7 @@ class AddCard extends Component {
 
 
             <Button title="Submit" onPress={() => this.props.navigation.navigate('Deck')}/>
-            </View>
+            </ScrollView>
         );
     }
 }
