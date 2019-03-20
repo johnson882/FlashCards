@@ -1,3 +1,4 @@
+let blank = {title:"", questions: []}
 let decks = {
   React: {
     title: 'React',
@@ -23,9 +24,38 @@ let decks = {
   }
 }
 
+
+function addTitle( key, value){
+  let copy = blank
+  console.log(copy)
+  copy["title"] = value
+  console.log(value)
+  return copy
+}
+
+function add(key,obj){
+
+    obj[key] = addTitle(key, key);
+
+
+    return obj;
+
+}
+
 export function _getDecks(){
   return new Promise((res, rej) => {
     setTimeout(() => res({...decks}), 1000)
   })
+}
 
+export function _getDeck(title){
+  return new Promise((res, rej) => {
+    setTimeout(() => res({...decks[title]}), 1000)
+  })
+}
+
+export function saveDeckTitle(title){
+  return new Promise((res, rej) => {
+    setTimeout(() => res(add(title, decks)), 1000)
+  })
 }

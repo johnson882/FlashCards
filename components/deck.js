@@ -7,6 +7,8 @@ import {
 
 } from "react-native";
 
+import {_getDecks, _getDeck, saveDeckTitle} from "../utils/AsyncStorage"
+
 class Deck extends Component {
 
     static navigationOptions = {
@@ -15,6 +17,13 @@ class Deck extends Component {
     } // this hides the header for navigation
 
     render() {
+
+    //  _getDecks().then((data) => {console.log(data)})
+      //_getDeck('React').then((data) => {console.log(data)})
+      saveDeckTitle('newDeck').then((data) => {console.log(data)})
+      saveDeckTitle('AnotherDeck').then((data) => {console.log(data)})
+
+
         return (
 
 
