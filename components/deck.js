@@ -7,7 +7,7 @@ import {
 
 } from "react-native";
 
-import {_getDecks, _getDeck, saveDeckTitle} from "../utils/AsyncStorage"
+import {_getDecks, _getDeck, saveDeckTitle, addCardToDeck} from "../utils/AsyncStorage"
 
 class Deck extends Component {
 
@@ -18,10 +18,21 @@ class Deck extends Component {
 
     render() {
 
-    //  _getDecks().then((data) => {console.log(data)})
-      //_getDeck('React').then((data) => {console.log(data)})
-      saveDeckTitle('newDeck').then((data) => {console.log(data)})
+    //  _getDecks().then((data) => {console.log(data)}) // gets all decks
+      //_getDeck('React').then((data) => {console.log(data)}) // pulls certain deck
+      saveDeckTitle('newDeck').then((data) => {console.log(data)}) // adds empty Deck
       saveDeckTitle('AnotherDeck').then((data) => {console.log(data)})
+
+      // arguments - String deckName, object question
+      addCardToDeck({question: 'this is a question test', answer:'this is a answer test'}, 'React').then((data) => {console.log(data)}) // saves a question to a deck
+
+      //deleteDeck()
+      //args: title - a string of the deck you want deleted
+
+
+      //DeleteCard()
+      //args: title - a string of the deck you want your card removed from, question - string of the question you want removed
+
 
 
         return (

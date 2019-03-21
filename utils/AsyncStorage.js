@@ -24,12 +24,20 @@ let decks = {
   }
 }
 
-function add(key,obj){
+function addDeck(key,obj){
   let aDeck = new Object();
   aDeck.title = key;
   aDeck.question = [];
   obj[key] = aDeck;
   return obj;
+}
+
+//adds card to decks object
+//args: card is a card object, deckName is a string of the deck title
+function addCard(card, deckName){
+    decks[deckName]["questions"].push(card);
+    return decks;
+
 }
 
 export function _getDecks(){
@@ -44,13 +52,18 @@ export function _getDeck(title){
   })
 }
 
-
 export function saveDeckTitle(title){
-
-
   return new Promise((res, rej) => {
-    setTimeout(() => res(add(title, decks)), 1000)
+    setTimeout(() => res(addDeck(title, decks)), 1000)
   })
 
   return title;
+}
+
+export function addCardToDeck(card, title){
+  return new Promise((res, rej) => {
+    setTimeout(() => res((addCard(card, title)), 1000 ))
+  })
+
+return decks;
 }
