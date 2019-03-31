@@ -7,7 +7,7 @@ import {
 
 } from "react-native";
 
-import {_getDecks, _getDeck, saveDeckTitle, addCardToDeck} from "../utils/AsyncStorage"
+import {_getDecks, _getDeck, saveDeckTitle, addCardToDeck, removeDeck, removeCard} from "../utils/AsyncStorage"
 
 class Deck extends Component {
 
@@ -28,9 +28,11 @@ class Deck extends Component {
 
       //deleteDeck()
       //args: title - a string of the deck you want deleted
+      removeDeck('React').then((data) => {console.log(data)}) // adds empty Deck
 
 
       //DeleteCard()
+      removeCard('JavaScript', 'What is a closure?')
       //args: title - a string of the deck you want your card removed from, question - string of the question you want removed
 
 

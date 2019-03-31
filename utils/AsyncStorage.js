@@ -40,6 +40,23 @@ function addCard(card, deckName){
 
 }
 
+function removeADeck(deckName){
+  delete decks[deckName];
+  return decks;
+}
+
+
+function removeACard(deckName, cardQuestion){
+
+  decks[deckName]["questions"].pop();
+  return decks;
+
+}
+
+  //decks[deckName]["questions"]
+
+
+
 export function _getDecks(){
   return new Promise((res, rej) => {
     setTimeout(() => res({...decks}), 1000)
@@ -66,4 +83,18 @@ export function addCardToDeck(card, title){
   })
 
 return decks;
+}
+
+export function removeDeck(title){
+  return new Promise((res,rej) => {
+    setTimeout(() => res((removeADeck(title)), 1000 ) )
+  })
+  return decks;
+}
+
+export function removeCard(deckName, cardQuestion){
+  return new Promise((res,rej) => {
+    setTimeout(() => res((removeACard(deckName, cardQuestion)), 1001 ) )
+  })
+  return decks;
 }
