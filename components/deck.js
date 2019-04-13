@@ -3,7 +3,8 @@ import {
     View,
     Text,
     StyleSheet,
-    Button
+    Button,
+  
 
 } from "react-native";
 
@@ -18,21 +19,28 @@ class Deck extends Component {
 
     render() {
 
-    //  _getDecks().then((data) => {console.log(data)}) // gets all decks
+    // _getDecks().then((data) => {console.log(data)}) // gets all decks
       //_getDeck('React').then((data) => {console.log(data)}) // pulls certain deck
-      saveDeckTitle('newDeck').then((data) => {console.log(data)}) // adds empty Deck
-      saveDeckTitle('AnotherDeck').then((data) => {console.log(data)})
+      let saveDeck = saveDeckTitle('newDeck') // adds empty Deck
+      console.log(saveDeck)
 
-      // arguments - String deckName, object question
-      addCardToDeck({question: 'this is a question test', answer:'this is a answer test'}, 'React').then((data) => {console.log(data)}) // saves a question to a deck
+
+    let saveDeck2 = saveDeckTitle('AnotherDeck')
+    console.log(saveDeck2)
+
+      // arguments -  object question,String deckName,
+      //addCardToDeck({question: 'this is a question test', answer:'this is a answer test'}, 'React').then((data) => {console.log(data)})
+
+
+      let removeADeck = removeDeck('React') // saves a question to a deck
 
       //deleteDeck()
       //args: title - a string of the deck you want deleted
-      removeDeck('React').then((data) => {console.log(data)}) // adds empty Deck
+       // adds empty Deck
 
 
       //DeleteCard()
-      removeCard('JavaScript', 'What is a closure?')
+      //removeCard('JavaScript', 'What is a closure?')
       //args: title - a string of the deck you want your card removed from, question - string of the question you want removed
 
 

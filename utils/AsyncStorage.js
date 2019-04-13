@@ -58,9 +58,7 @@ function removeACard(deckName, cardQuestion){
 
 
 export function _getDecks(){
-  return new Promise((res, rej) => {
-    setTimeout(() => res({...decks}), 1000)
-  })
+  return {...decks};
 }
 
 export function _getDeck(title){
@@ -74,7 +72,7 @@ export function saveDeckTitle(title){
     setTimeout(() => res(addDeck(title, decks)), 1000)
   })
 
-  return title;
+  //return title;
 }
 
 export function addCardToDeck(card, title){
@@ -82,19 +80,19 @@ export function addCardToDeck(card, title){
     setTimeout(() => res((addCard(card, title)), 1000 ))
   })
 
-return decks;
+//return decks;
 }
 
 export function removeDeck(title){
   return new Promise((res,rej) => {
     setTimeout(() => res((removeADeck(title)), 1000 ) )
   })
-  return decks;
+  //return decks;
 }
 
 export function removeCard(deckName, cardQuestion){
   return new Promise((res,rej) => {
-    setTimeout(() => res((removeACard(deckName, cardQuestion)), 1001 ) )
+    setTimeout(() => res((removeACard(deckName, cardQuestion)), 1000 ) )
   })
-  return decks;
+  //return decks;
 }
