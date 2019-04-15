@@ -58,7 +58,9 @@ function removeACard(deckName, cardQuestion){
 
 
 export function _getDecks(){
-  return {...decks};
+  return new Promise((res, rej) => {
+    setTimeout(() => res({...decks}), 1000)
+  })
 }
 
 export function _getDeck(title){
