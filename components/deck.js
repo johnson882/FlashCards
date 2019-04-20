@@ -22,7 +22,7 @@ class Deck extends Component {
     // _getDecks().then((data) => {console.log(data)}) // gets all decks
       //_getDeck('React').then((data) => {console.log(data)}) // pulls certain deck
       let saveDeck = saveDeckTitle('newDeck') // adds empty Deck
-    //  console.log(saveDeck)
+      console.log(saveDeck)
 
 
     let saveDeck2 = saveDeckTitle('AnotherDeck')

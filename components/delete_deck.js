@@ -97,9 +97,12 @@ console.log("here is your array!:", data
 
             <View style={styles.container}>
 
+            <FlatList
+    data={[{key: 'a'}, {key: 'b'}]}
+    renderItem={({item}) => <Text>{item.key}</Text>}
+  />
 
 
-            
 
 
               <Button title="Back Button" onPress={() => this.props.navigation.navigate('Home')}/>
