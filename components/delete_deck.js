@@ -4,7 +4,9 @@ import {
     Text,
     StyleSheet,
     Button,
-    FlatList
+    FlatList,
+    ListView,
+    TouchableHighlight,
 
 } from "react-native";
 
@@ -21,17 +23,10 @@ class DeleteDeck extends Component {
         title: "Delete Decks"
     } // this hides the header for navigation
 
-    componentDidMount() {
-        _getDecks().then((value) => {
-          this.setState({val: value,load:true})
-
-        })
-      }
-
-      renderCategories(data) {
-        console.log("data from func:", data)
-    //return data.map((item, index) => <Text key={index}>{item.text}</Text>);
-    return "";
+    componentDidMount(){
+      _getDecks().then((value) => {
+        this.setState({val: value,load:true})
+      })
     }
 
        stateToArray(){
@@ -39,46 +34,26 @@ class DeleteDeck extends Component {
 
           if(this.state.val !== "") // val
           {
-            let value = this.state.val;
-
-
             for (var a in this.state.val){
-
              stateArray.push(a)
-        }
-console.log("StateArray:", stateArray)
-
+           }
           }
-
-
-
           return stateArray;
         }
 
+deleteItem(item){
+  console.log("deleted Item:", item )
+  removeDeck(item).then((value) => {
+    this.setState({val: value, load:true})
+  })
+}
 
 
-
-    render() {
-
-
-
-    let renderthis = (<Text>Pick a deck to delete:</Text>)
-
-    list = (
-      <FlatList
-        data={this.stateToArray()}
-      />
-    )
-    let getTheDecks = _getDecks()
-    let arrayOfNames = [];
-
-
-  if(this.state.val !== "")
-  {
+  render(){
+    if(this.state.val !== ""){
     // console.log(this.state)
      console.log(this.stateToArray())
   }
-
 
 let data = this.stateToArray()
 console.log("here is your array!:", data
@@ -96,10 +71,19 @@ console.log("here is your array!:", data
         return (
 
             <View style={styles.container}>
+<Text>Which deck would you like to delete:</Text>
 
             <FlatList
-    data={[{key: 'a'}, {key: 'b'}]}
-    renderItem={({item}) => <Text>{item.key}</Text>}
+    data={[{key: data[0]}, {key: data[1]}]}
+    extraData={this.state}
+    renderItem={({item}) =>
+
+    <TouchableHighlight onPress={() => this.deleteItem(item.key)}>
+                    <Text >{item.key}</Text>
+               </TouchableHighlight>
+
+
+  }
   />
 
 
