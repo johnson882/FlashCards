@@ -63,7 +63,7 @@ class Home extends Component {
 
 
             <View style={styles.container}>
-              <Button title="Deck 1 (example)" onPress={() => this.props.navigation.navigate('Deck')}/>
+            
 
               <FlatList
       data={data}
