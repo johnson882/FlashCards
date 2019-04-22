@@ -11,11 +11,18 @@ import {
 import {_getDecks, _getDeck, saveDeckTitle, addCardToDeck, removeDeck, removeCard} from "../utils/AsyncStorage"
 
 class Deck extends Component {
-
-    static navigationOptions = {
-      title: "Deck 1"
-
-    } // this hides the header for navigation
+  constructor(props) {
+    super(props);
+    const { navigation } = this.props;
+    const DeckName = navigation.getParam('DeckTitle', 'NO-ID');
+    const otherParam = navigation.getParam('otherParam', 'blank');
+    this.state= {DeckName, otherParam}
+  }
+  static navigationOptions = ({ navigation }) => {
+  return {
+    title: navigation.getParam('DeckTitle', 'A component that displays deck Options'),
+  };
+};
 
     render() {
 
@@ -49,6 +56,8 @@ class Deck extends Component {
 
 
             <View style={styles.container}>
+
+            <Text>{this.state.DeckName} </Text>
             <Button title="Take test" onPress={() => this.props.navigation.navigate('Card')}/>
 
             <Button title="Add Question" onPress={() => this.props.navigation.navigate('AddCard')}/>
