@@ -34,8 +34,14 @@ class DeleteDeck extends Component {
 
           if(this.state.val !== "") // val
           {
+            let aObject = {};
+            let key;
+
             for (var a in this.state.val){
-             stateArray.push(a)
+              key = a;
+              aObject["key"] = a;
+              stateArray.push(aObject)
+              aObject = {}
            }
           }
           return stateArray;
@@ -74,7 +80,7 @@ console.log("here is your array!:", data
 <Text>Which deck would you like to delete:</Text>
 
             <FlatList
-    data={[{key: data[0]}, {key: data[1]}]}
+    data={data}
     extraData={this.state}
     renderItem={({item}) =>
 
