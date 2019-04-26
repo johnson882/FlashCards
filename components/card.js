@@ -9,6 +9,13 @@ import {
 
 class Card extends Component {
 
+constructor(props){
+super(props);
+this.state = {};
+
+}
+
+
     static navigationOptions = {
       title: "Card 1"
 
@@ -20,10 +27,8 @@ class Card extends Component {
 
             <View style={styles.container}>
             <Text> Question: What is the diameter of the sun? </Text>
-            <Button title="Answer1"/>
-            <Button title="Answer2"/>
-            <Button title="Answer3"/>
-            <Button title="Answer4"/>
+            <Button title="Show Answer"/>
+
 
 
 
