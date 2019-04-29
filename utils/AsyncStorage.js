@@ -69,6 +69,13 @@ export function _getDeck(title){
   })
 }
 
+export function _getCards(title){
+  return new Promise((res, rej) => {
+    setTimeout(() => res(decks[title].questions), 1000)
+  })
+
+}
+
 export function saveDeckTitle(title){
   return new Promise((res, rej) => {
     setTimeout(() => res(addDeck(title, decks)), 1000)

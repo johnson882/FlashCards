@@ -28,18 +28,18 @@ class Deck extends Component {
 
     // _getDecks().then((data) => {console.log(data)}) // gets all decks
       //_getDeck('React').then((data) => {console.log(data)}) // pulls certain deck
-      let saveDeck = saveDeckTitle('newDeck') // adds empty Deck
-      console.log(saveDeck)
+      //let saveDeck = saveDeckTitle('newDeck') // adds empty Deck
+    //  console.log(saveDeck)
 
 
-    let saveDeck2 = saveDeckTitle('AnotherDeck')
+    //let saveDeck2 = saveDeckTitle('AnotherDeck')
   //  console.log(saveDeck2)
 
       // arguments -  object question,String deckName,
       //addCardToDeck({question: 'this is a question test', answer:'this is a answer test'}, 'React').then((data) => {console.log(data)})
 
 
-      let removeADeck = removeDeck('React') // saves a question to a deck
+    //  let removeADeck = removeDeck('React') // saves a question to a deck
 
       //deleteDeck()
       //args: title - a string of the deck you want deleted
