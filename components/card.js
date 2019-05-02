@@ -16,11 +16,15 @@ class Card extends Component {
 
 constructor(props){
 super(props);
-this.state = {"Questions":0, "loaded":false, "index":0};
-
+this.state = {"Questions":0, "loaded":false, "index": 0};
+this.handler = this.handler.bind(this)
 }
 
-
+handler(index){
+  let aindex = ++this.state.index;
+  this.setState({"index": aindex})
+  console.log("index:", this.state.index)
+}
     static navigationOptions = {
       title: "Card 1"
 
@@ -34,8 +38,14 @@ this.state = {"Questions":0, "loaded":false, "index":0};
         this.setState({"Questions":value,"loaded":true})
       })
       console.log(this.state)
+
+
     }
+
+
     render() {
+
+
       let question = [];
       let answer = [];
       let arrayLength = 0;
@@ -52,12 +62,15 @@ this.state = {"Questions":0, "loaded":false, "index":0};
 
       console.log("question:",question)
       console.log("answer:",answer)
+
     }
+    let handler = this.handler
+    console.log("index in render:",this.state.index)
         return (
 
 
             <View style={styles.container}>
-            {this.state.loaded == true ? <CardQA question={question[this.state.index]} answer={answer[this.state.index]} /> : <Text> Waiting for data...</Text> }
+            {this.state.loaded == true ? <CardQA index={this.state.index} handler={handler.bind(this)} question={question[this.state.index]} answer={answer[this.state.index]} /> : <Text> Waiting for data...</Text> }
 
 
 
