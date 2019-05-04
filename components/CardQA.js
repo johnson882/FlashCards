@@ -11,11 +11,12 @@ class CardQA extends Component {
 
   constructor(props){
   super(props);
+  console.log("cardqa props:",props)
   this.state = {"question": props.question, "answer":props.answer, "index": props.index};
 }
 
   render(){
-console.log(this.state.index)
+console.log("index in card:",this.state.index)
     return(
       <View>
       <Text> index: {this.state.index}</Text>
