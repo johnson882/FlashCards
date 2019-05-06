@@ -21,10 +21,12 @@ this.handler = this.handler.bind(this)
 }
 
 handler(index){
-  let aindex = ++this.state.index;
+  console.log("index from CardQA:", index)
+  let aindex = ++index;
   this.setState({"index": aindex})
 
   console.log("index:", this.state.index)
+  return index;
 }
     static navigationOptions = {
       title: "Card 1"
@@ -44,6 +46,7 @@ handler(index){
     }
 
 
+
     render() {
 
 
@@ -51,6 +54,7 @@ handler(index){
       let answer = [];
       let arrayLength = 0;
       let stateIndex = 0;
+      let loaded = false;
       console.log("this is the current state:",this.state)
       //let question = this.state.Questions[0].question
       if(this.state.loaded == true)
@@ -65,6 +69,8 @@ handler(index){
       console.log("question:",question)
       console.log("answer:",answer)
       stateIndex = this.state.index;
+      loaded = this.state.loaded
+      console.log("loaded:", loaded)
 
     }
     let handler = this.handler
@@ -73,8 +79,9 @@ handler(index){
 
 
             <View style={styles.container}>
-            {console.log("state Index:",stateIndex)}
-            {this.state.loaded == true ? <CardQA index={stateIndex} handler={handler.bind(this)} question={question[stateIndex]} answer={answer[stateIndex]} /> : <Text> Waiting for data...</Text> }
+            {console.log("state Index:", stateIndex)}
+
+            {loaded == true? <CardQA index={stateIndex} handler={handler.bind(this)} question={question[stateIndex]} answer={answer[stateIndex]} /> : <Text> Waiting for data...</Text> }
 
 
 

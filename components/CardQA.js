@@ -14,7 +14,11 @@ class CardQA extends Component {
   console.log("cardqa props:",props)
   this.state = {"question": props.question, "answer":props.answer, "index": props.index};
 }
-
+componentWillUpdate(nextProps, nextState) {
+  nextState.question = nextProps.question;
+  nextState.index = nextProps.index;
+  nextState.answer = nextProps.answer;
+}
   render(){
 console.log("index in card:",this.state.index)
     return(
