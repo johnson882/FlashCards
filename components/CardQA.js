@@ -12,23 +12,19 @@ class CardQA extends Component {
   constructor(props){
   super(props);
   console.log("cardqa props:",props)
-  this.state = {"question": props.question, "answer":props.answer, "index": props.index};
+  
 }
-componentDidUpdate(nextProps, nextState) {
-  nextState.question = nextProps.question;
-  nextState.index = nextProps.index;
-  nextState.answer = nextProps.answer;
-}
+
   render(){
-console.log("index in card:",this.state.index)
+console.log("index in card:",this.props.index)
     return(
       <View>
-      <Text> index: {this.state.index}</Text>
-      <Text>Question: {this.state.question}</Text>
+      <Text> index: {this.props.index}</Text>
+      <Text>Question: {this.props.question}</Text>
 
-      <Text>Answer: {this.state.answer}</Text>
+      <Text>Answer: {this.props.answer}</Text>
 
-      <Button title={"next Question"} onPress={()=>{this.props.handler(this.state.index)}}> </Button>
+      <Button title={"next Question"} onPress={()=>{this.props.handler(this.props.index)}}> </Button>
 </View>
     )
   }

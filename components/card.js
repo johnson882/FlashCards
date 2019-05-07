@@ -24,7 +24,6 @@ handler(index){
   console.log("index from CardQA:", index)
   let aindex = ++index;
   this.setState({"index": aindex})
-
   console.log("index:", this.state.index)
   return index;
 }
@@ -66,7 +65,6 @@ handler(index){
           answer[i] = this.state.Questions[i].answer
         }
 
-      console.log("question:",question)
       console.log("answer:",answer)
       stateIndex = this.state.index;
       loaded = this.state.loaded
@@ -82,9 +80,6 @@ handler(index){
             {console.log("state Index:", stateIndex)}
 
             {loaded == true? <CardQA index={stateIndex} handler={handler.bind(this)} question={question[stateIndex]} answer={answer[stateIndex]} /> : <Text> Waiting for data...</Text> }
-
-
-
 
 
 
