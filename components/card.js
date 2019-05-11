@@ -79,7 +79,7 @@ handler(index){
             <View style={styles.container}>
             {console.log("state Index:", stateIndex)}
 
-            {loaded == true? <CardQA index={stateIndex} handler={handler.bind(this)} question={question[stateIndex]} answer={answer[stateIndex]} /> : <Text> Waiting for data...</Text> }
+            {loaded == true ? <CardQA index={stateIndex} arrayLength={arrayLength} handler={handler.bind(this)} question={question[stateIndex]} answer={answer[stateIndex]} /> : <Text> Waiting for data...</Text> }
 
 
 
