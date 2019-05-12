@@ -22,6 +22,10 @@ class CardQA extends Component {
 
   render(){
 console.log("index in card:",this.props.index)
+
+
+
+
     return(
       <View>
 
