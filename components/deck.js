@@ -60,7 +60,7 @@ class Deck extends Component {
             <Text>{this.state.DeckName} </Text>
             <Button title="Take test" onPress={() => this.props.navigation.navigate('Card',{"deckName":this.state.DeckName})}/>
 
-            <Button title="Add Question" onPress={() => this.props.navigation.navigate('AddCard')}/>
+            <Button title="Add Question" onPress={() => this.props.navigation.navigate('AddCard', {"deckName":this.state.DeckName})}/>
             <Button title="Delete Question" onPress={() => this.props.navigation.navigate('DeleteCard')}/>
 
             </View>

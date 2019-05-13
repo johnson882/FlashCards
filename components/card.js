@@ -59,7 +59,7 @@ handler(index){
       let stateIndex = 0;
       let loaded = false;
 
-      
+
 
 
 
@@ -101,8 +101,7 @@ handler(index){
 
             <View style={styles.container}>
             {ifLoad}
-{console.log("state Index:", stateIndex)}
-{console.log("arrayLength:", arrayLength)}
+
 
 
 

@@ -5,9 +5,12 @@ import {
     StyleSheet,
     Button,
     TextInput,
-    ScrollView
+    ScrollView,
+    TouchableOpacity
 
 } from "react-native";
+
+import {addCardToDeck} from "../utils/AsyncStorage"
 
 class AddCard extends Component {
 
@@ -18,12 +21,28 @@ class AddCard extends Component {
        textAnswer: 'answer',
        textWrong1: 'wrong answer'
     };
+    this.handler = this.handler.bind(this)
    }
 
     static navigationOptions = {
        title: 'Add Card',
     } // this hides the header for navigation
 
+    handler(index){
+      
+      addCardToDeck({"question": this.state.textQuestion , "answer": this.state.textAnswer }, this.props.navigation.getParam('deckName'))
+
+      this.props.navigation.goBack();
+    }
+
+    handleQuestion = (text) => {
+      this.setState({"textQuestion": text})
+
+    }
+    handleAnswer = (text) => {
+      this.setState({"textAnswer": text})
+
+    }
     render() {
         return (
             <ScrollView style={{
@@ -33,7 +52,7 @@ class AddCard extends Component {
 
             <TextInput
         style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-        onChangeText={(textQuestion) => this.setState({textQuestion})}
+        onChangeText={this.handleQuestion}
 
         multiline = {true}
          numberOfLines = {4}
@@ -47,7 +66,7 @@ class AddCard extends Component {
             <Text> Answer: </Text>
             <TextInput
             style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-            onChangeText={(textAnswer) => this.setState({textAnswer})}
+            onChangeText={this.handleAnswer}
 
             multiline = {true}
             numberOfLines = {4}
@@ -58,23 +77,18 @@ class AddCard extends Component {
             />
 
 
-            <Button title="Add another answer"/>
-
-            <Text> Wrong answer: </Text>
-            <TextInput
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-            onChangeText={(textWrong1) => this.setState({textWrong1})}
-
-            multiline = {true}
-            numberOfLines = {4}
-            margin = {50}
-            padding = {10}
-            placeholder= {'Wrong Answer'}
-            placeholderTextColor = {'red'}
-            />
 
 
-            <Button title="Submit" onPress={() => this.props.navigation.navigate('Deck')}/>
+
+            <TouchableOpacity
+
+                           onPress = {
+                              () => this.handler(this.state.handleQuestion, this.state.handleAnswer)
+                           }>
+                           <Text> Submit </Text>
+                        </TouchableOpacity>
+
+
             </ScrollView>
         );
     }
