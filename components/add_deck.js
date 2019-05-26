@@ -11,15 +11,26 @@ import {
 
 import InputField from './inputField'
 
+import {saveDeckTitle, _getDecks} from "../utils/AsyncStorage"
+
 class AddDeck extends Component {
   constructor(props) {
      super(props);
      this.state = { text: '' };
+
    }
 
     static navigationOptions = {
        title: 'Add Deck',
     } // this hides the header for navigation
+
+    handleSubmit(deckName){
+      saveDeckTitle(this.state.text).then(  console.log(_getDecks()));
+
+ this.props.navigation.goBack();
+
+    }
+
 
     render() {
         return (
@@ -47,7 +58,7 @@ class AddDeck extends Component {
 
 
 
-              <Button title="Submit" onPress={() => this.props.navigation.navigate('Home')}/>
+              <Button title="Submit" onPress={() => {this.handleSubmit()}}/>
 
 
               <Text>{this.state.text}</Text>

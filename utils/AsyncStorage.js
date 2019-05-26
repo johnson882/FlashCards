@@ -1,4 +1,5 @@
-//let blank = {title:"", questions: []}
+
+// next time maybe a array for decks would work better?
 let decks = {
   React: {
     title: 'React',
@@ -24,12 +25,22 @@ let decks = {
   }
 }
 
-function addDeck(key,obj){
-  let aDeck = new Object();
-  aDeck.title = key;
-  aDeck.question = [];
-  obj[key] = aDeck;
-  return obj;
+function addDeck(key){
+
+  let tempObject = new Object();
+  let questionsObject = new Object();
+  let titleObject = new Object();
+  let merged = new Object();
+
+
+  questionsObject["questions"] = []
+  titleObject["title"] = key;
+  merged = {...titleObject,...questionsObject}
+  tempObject[key] = merged
+  
+  decks = {...decks, ...tempObject};
+
+  return decks;
 }
 
 //adds card to decks object
@@ -78,7 +89,7 @@ export function _getCards(title){
 
 export function saveDeckTitle(title){
   return new Promise((res, rej) => {
-    setTimeout(() => res(addDeck(title, decks)), 1000)
+    setTimeout(() => res(addDeck(title)), 1000)
   })
 
   //return title;
