@@ -63,7 +63,7 @@ class Home extends Component {
 
 
             <View style={styles.container}>
-            
+
 
               <FlatList
       data={data}

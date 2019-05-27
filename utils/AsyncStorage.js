@@ -37,7 +37,7 @@ function addDeck(key){
   titleObject["title"] = key;
   merged = {...titleObject,...questionsObject}
   tempObject[key] = merged
-  
+
   decks = {...decks, ...tempObject};
 
   return decks;
@@ -114,5 +114,5 @@ export function removeCard(deckName, cardQuestion){
   return new Promise((res,rej) => {
     setTimeout(() => res((removeACard(deckName, cardQuestion)), 1000 ) )
   })
-  //return decks;
+  return decks;
 }
