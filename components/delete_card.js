@@ -3,9 +3,11 @@ import {
     View,
     Text,
     StyleSheet,
-    Button
+    Button,
+    FlatList
 
 } from "react-native";
+ import {_getCards,removeCard} from "../utils/AsyncStorage"
 
 class DeleteCard extends Component {
 
@@ -19,11 +21,19 @@ class DeleteCard extends Component {
 
 
             <View style={styles.container}>
-            <Button title="Question 1: What is the diamter..."/>
-            <Button title="Question 2: What is the perimeter..."/>
-            <Button title="Question 3: What is the size..."/>
+
+            <Text>Which Question do you want to deleted:</Text>
+
+            <FlatList
+
+          extraData={this.state}
 
 
+
+
+
+
+          />
 
             <Button title="Delete cards" onPress={() => this.props.navigation.navigate('Deck')}/>
 

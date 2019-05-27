@@ -19,7 +19,7 @@ super(props);
 this.state = {"Questions":0, "loaded":false, "index": 0, "deckName":""};
 //let { navigation } = null;
 //let itemId = null;
-this.handler = this.handler.bind(this)
+//this.handler = this.handler.bind(this)
 
 }
 
