@@ -14,7 +14,7 @@ class DeleteCard extends Component {
   constructor(props){
     super(props);
     let theProps = this.props.navigation.getParam('deckName');
-    this.state = {"Questions":"", "loaded": false, "deckName":theProps};
+    this.state = {"Questions":"", "loaded": false, "deckName":theProps,  "questionList": ""};
 
     _getCards(theProps).then((value) => {
       this.setState({"Questions": value, "loaded":true})
@@ -26,10 +26,29 @@ class DeleteCard extends Component {
       title: "Deck 1"
 
     } // this hides the header for navigation
-    deleteCard(){
-      removeCard( this.state.deckName, "Where do you make Ajax requests in React?").then((value) => {console.log(value)})
+    deleteCard(question){
+      //removeCard( this.state.deckName, "Where do you make Ajax requests in React?").then((value) => {console.log(value)})
+
     }
+
+    getQuestionsFromState(){
+        let newArray;
+        let questions = this.state.Questions;
+        let length = this.state.Questions.length;
+        console.log("length:", length)
+      console.log("Get question from state:",this.state.Questions)
+
+    //console.log(this.state.Questions[0])
+      //this.state.Questions
+      questions.forEach(function(obj) {
+        console.log(obj.question, obj.answer);
+      })
+
+
+    }
+
     componentDidMount(){
+
       this.deleteCard();
 
       //console.log("Questions", this.state.Questions)
@@ -39,14 +58,14 @@ class DeleteCard extends Component {
     stateToArray(){
        let stateArray = [];
 
-       if(this.state.questions !== "") // val
+       if(this.state.Questions !== "") // val
        {
          let aObject = {};
          let key;
 
-         for (var a in this.state.questions){
+         for (var a in this.state.Questions){
            key = a;
-           aObject["key"] = a;
+           aObject["Question"] = a;
            stateArray.push(aObject)
            aObject = {}
         }
@@ -57,11 +76,11 @@ class DeleteCard extends Component {
 
     render() {
       let questions = []
-      console.log("Questions", this.state.Questions)
+      console.log("Questions:", this.state.Questions)
 
         if(this.state.loaded == true)
         {
-          //questions = this.state
+          this.getQuestionsFromState()
         }
         return (
 
