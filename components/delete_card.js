@@ -32,14 +32,11 @@ class DeleteCard extends Component {
     }
 
     getQuestionsFromState(){
-        let newArray;
-        let questions = this.state.Questions;
-        let length = this.state.Questions.length;
-        console.log("length:", length)
+
+      let questions = this.state.Questions;
+
       console.log("Get question from state:",this.state.Questions)
 
-    //console.log(this.state.Questions[0])
-      //this.state.Questions
       questions.forEach(function(obj) {
         console.log(obj.question, obj.answer);
       })
