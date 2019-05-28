@@ -45,6 +45,27 @@ function addDeck(key){
 
 //adds card to decks object
 //args: card is a card object, deckName is a string of the deck title
+
+function removeValueFromArray(array, questionText){
+  //return array.filter(question => question != "What is React?")
+  for( var i = 0; i < array.length; i++){
+   if ( array[i].question === questionText) {
+     array.splice(i, 1);
+     i--;
+   }
+}
+
+console.log("questionArray:", array)
+}
+
+function removeACard(deckName, cardQuestion){
+  console.log("current deck:",decks)
+  removeValueFromArray(decks[deckName]["questions"], cardQuestion)
+  console.log("tried to remove a card!")
+  return decks;
+
+}
+
 function addCard(card, deckName){
     decks[deckName]["questions"].push(card);
     return decks;
@@ -57,12 +78,7 @@ function removeADeck(deckName){
 }
 
 
-function removeACard(deckName, cardQuestion){
 
-  decks[deckName]["questions"].pop();
-  return decks;
-
-}
 
   //decks[deckName]["questions"]
 

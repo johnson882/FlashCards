@@ -13,8 +13,9 @@ class DeleteCard extends Component {
 
   constructor(props){
     super(props);
-    this.state = {"Questions":"", "loaded": false};
     let theProps = this.props.navigation.getParam('deckName');
+    this.state = {"Questions":"", "loaded": false, "deckName":theProps};
+
     _getCards(theProps).then((value) => {
       this.setState({"Questions": value, "loaded":true})
     })
@@ -26,7 +27,7 @@ class DeleteCard extends Component {
 
     } // this hides the header for navigation
     deleteCard(){
-      removeCard("React", "What is React?").then((value) => {console.log(value)})
+      removeCard( this.state.deckName, "Where do you make Ajax requests in React?").then((value) => {console.log(value)})
     }
     componentDidMount(){
       this.deleteCard();
