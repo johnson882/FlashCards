@@ -17,55 +17,41 @@ class DeleteCard extends Component {
     super(props);
     let theProps = this.props.navigation.getParam('deckName');
     this.state = {"Questions":"", "loaded": false, "deleteLoad": false, "deckName":theProps,  "questionList": "", "reload": false};
-
-
-
   }
 
-    static navigationOptions = {
-      title: "Deck 1"
-
+  static navigationOptions = {
+    title: "Deck 1"
     } // this hides the header for navigation
-    deleteCard(question){
-      removeCard( this.state.deckName, question).then((value) => {console.log(value)})
 
+    deleteCard(question){
+      removeCard( this.state.deckName, question).then((value) => {console.log("removed Item:",value)})
+      _getCards( this.state.deckName).then((value) => {
+        this.setState({"Questions":  value , "loaded":true})
+      })
     }
 
-    getQuestionsFromState(){
+    getQuestionsFromState(questionsObject){
       let questions = [];
-      //let StateQuestion = this.state.question
-      let questionsFromState = this.state.Questions;
-
-      console.log("Get question from state:",this.state.Questions)
-
-      questionsFromState.forEach(function(obj) {
+      questionsObject.forEach(function(obj,index) {
         questions.push(obj.question)
-        console.log(obj.question, obj.answer);
       })
-
       return questions;
     }
 
     componentDidMount(){
       _getCards( this.props.navigation.getParam('deckName')).then((value) => {
-        this.setState({"Questions": value, "loaded":true})
+        this.setState({"Questions":  value , "loaded":true})
       })
-      this.deleteCard();
-
-      //console.log("Questions", this.state.Questions)
     }
 
 
     arrayToObject(questions){
        let stateArray = [];
-       console.log("questions inside" ,questions)
-       if(questions !== "") // val
+       if(questions !== "")
        {
          let aObject = {};
          let key;
-
          for (var a in questions){
-
            key = questions[a];
            console.log(key);
            aObject["key"] = key;
@@ -73,64 +59,39 @@ class DeleteCard extends Component {
            aObject = {}
         }
        }
-
        return stateArray;
      }
 
      actionOnRow(item)
      {
-       console.log("item:", item)
-       this.deleteCard(item);
-this.props.navigation.navigate('Deck')
-      this.setState({"reload":true, "loaded":false})
+      this.deleteCard(item);
+      this.setState({ "loaded":true})
      }
+
     render() {
       let questions = []
       let qState = []
       let aObject = {}
-      let flatlist;
-      console.log("Questions:", this.state.Questions)
 
         if(this.state.loaded == true)
         {
-            qState = this.getQuestionsFromState()
+          qState = this.getQuestionsFromState(this.state.Questions);
+          aObject = this.arrayToObject(qState)
 
-
-            console.log("questionListState:", qState)
-            aObject = this.arrayToObject(qState)
-
-          console.log("aObject:", aObject);
-
-        }
-        else{
-          flatlist = <Text>Loading </Text>
-        }
-
-        if(this.state.loaded == true)
-        {
-        return (
-
-
+          return(
             <View style={styles.container}>
 
             <Text>Which Question do you want to deleted:</Text>
             <Text> </Text>
-
-
             <FlatList data = {aObject} renderItem={({ item }) => (
-
               <TouchableHighlight onPress={() => this.actionOnRow(item.key) }>
-                              <Text >{item.key}</Text>
+                              <Text  containerStyle={{marginBottom: 30, backgroundColor: '#fff'}} >{item.key}</Text>
                          </TouchableHighlight>
           )}/>
 
-
-
-            <Button title="Delete cards" onPress={() => this.props.navigation.navigate('Deck')}/>
-
-
-            </View>
-        );
+          <Button title="Back" onPress={() => this.props.navigation.navigate('Deck')}/>
+          </View>
+          );
         }
         else{
           return ( <View>
