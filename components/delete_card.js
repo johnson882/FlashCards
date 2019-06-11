@@ -44,7 +44,6 @@ class DeleteCard extends Component {
       })
     }
 
-
     arrayToObject(questions){
        let stateArray = [];
        if(questions !== "")
@@ -60,12 +59,6 @@ class DeleteCard extends Component {
         }
        }
        return stateArray;
-     }
-
-     actionOnRow(item)
-     {
-      this.deleteCard(item);
-      this.setState({ "loaded":true})
      }
 
     render() {
@@ -84,8 +77,8 @@ class DeleteCard extends Component {
             <Text>Which Question do you want to deleted:</Text>
             <Text> </Text>
             <FlatList data = {aObject} renderItem={({ item }) => (
-              <TouchableHighlight onPress={() => this.actionOnRow(item.key) }>
-                              <Text  containerStyle={{marginBottom: 30, backgroundColor: '#fff'}} >{item.key}</Text>
+              <TouchableHighlight onPress={() => this.deleteCard(item.key) }>
+                              <Text style={styles.container}>{item.key}</Text>
                          </TouchableHighlight>
           )}/>
 
@@ -106,6 +99,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        margin: 10,
     }
 });
