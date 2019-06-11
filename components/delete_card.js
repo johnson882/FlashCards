@@ -11,6 +11,8 @@ import {
 } from "react-native";
  import {_getCards,removeCard} from "../utils/AsyncStorage"
 
+ import {ListItem} from 'react-native-elements'
+
 class DeleteCard extends Component {
 
   constructor(props){
@@ -76,10 +78,13 @@ class DeleteCard extends Component {
 
             <Text>Which Question do you want to deleted:</Text>
             <Text> </Text>
+
             <FlatList data = {aObject} renderItem={({ item }) => (
+              
               <TouchableHighlight onPress={() => this.deleteCard(item.key) }>
                               <Text style={styles.container}>{item.key}</Text>
                          </TouchableHighlight>
+
           )}/>
 
           <Button title="Back" onPress={() => this.props.navigation.navigate('Deck')}/>
