@@ -16,15 +16,19 @@ class Card extends Component {
 
 constructor(props){
 super(props);
-this.state = {"Questions":0, "loaded":false, "index": 0, "deckName":""};
+this.state = {"Questions":0, "loaded":false, "index": 0, "deckName":"", "finalQuestion":false, "randomArray":[], "initArray":false};
+console.log("constructor Called!")
 //let { navigation } = null;
 //let itemId = null;
 //this.handler = this.handler.bind(this)
 
 }
 
+r
+
 handler(index){
-  console.log("index from CardQA:", index)
+
+
   let aindex = ++index;
   this.setState({"index": aindex})
   console.log("index:", this.state.index)
@@ -38,15 +42,19 @@ handler(index){
     componentDidMount(){
 
       let theProps = this.props.navigation.getParam('deckName');
+      let valueQuestions;
 
       _getCards(theProps).then((value) => {
+          this.setState({"Questions":value,"loaded":true})
 
-        this.setState({"Questions":value,"loaded":true})
       })
 
 
 
+
     }
+
+
 
 
 
@@ -75,8 +83,10 @@ handler(index){
         }
 
       console.log("answer:",answer)
+      console.log("question:",question)
       stateIndex = this.state.index;
       loaded = this.state.loaded
+
       console.log("loaded:", loaded)
 
     }
@@ -85,12 +95,12 @@ handler(index){
 
     let ifLoad;
 
-    if (stateIndex < arrayLength && loaded == true)
+    if (stateIndex < arrayLength && loaded == true && this.state.finalQuestion == false)
     {
       ifLoad = <CardQA index={stateIndex} arrayLength={arrayLength} handler={handler.bind(this)} question={question[stateIndex]} answer={answer[stateIndex]} />
 
     }
-     else if(stateIndex >= arrayLength && loaded == true){
+     else if(stateIndex >= arrayLength && loaded == true && this.state.finalQuestion == false ){
         ifLoad =  <Text> QUIZ FININISHED </Text> ;
     }
     else{

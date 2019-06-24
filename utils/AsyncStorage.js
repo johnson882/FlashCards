@@ -43,6 +43,11 @@ function addDeck(key){
   return decks;
 }
 
+function randomizeQuestions(array){
+  array.sort(() => Math.random() - 0.5);
+  return array;
+}
+
 //adds card to decks object
 //args: card is a card object, deckName is a string of the deck title
 
@@ -98,7 +103,7 @@ export function _getDeck(title){
 
 export function _getCards(title){
   return new Promise((res, rej) => {
-    setTimeout(() => res(decks[title].questions), 1000)
+    setTimeout(() => res(randomizeQuestions(decks[title].questions)), 1000)
   })
 
 }
