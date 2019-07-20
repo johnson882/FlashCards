@@ -1,3 +1,4 @@
+import {AsyncStorage} from 'react-native';
 
 // next time maybe a array for decks would work better?
 let decks = {
@@ -25,13 +26,23 @@ let decks = {
   }
 }
 
-function addDeck(key){
+_storeData = async (decks) => {
+  try {
+    await AsyncStorage.setItem('decks', JSON.stringify(decks));
+  } catch (error) {
+    // Error saving data
+    console.log(error)
+  }
+};
 
+async function addDeck(key){
+
+  
   let tempObject = new Object();
   let questionsObject = new Object();
   let titleObject = new Object();
   let merged = new Object();
-
+  console.log("Decks before add:", decks)
 
   questionsObject["questions"] = []
   titleObject["title"] = key;
@@ -39,9 +50,32 @@ function addDeck(key){
   tempObject[key] = merged
 
   decks = {...decks, ...tempObject};
+    console.log("Saved Item to Storage!", decks)
+await _storeData(decks);
+
+//await AsyncStorage.setItem('decks', JSON.stringify(decks));
+
 
   return decks;
 }
+
+async function getDecks(key){
+console.log("Param for getDecks:", key)
+
+  const temp  = await AsyncStorage.getItem('decks');
+//  let firstTime= await AsyncStorage.getItem('count');;
+
+
+  let parsedTemp;
+  console.log("returned from asyncStorage:", JSON.parse(temp))
+
+  parsedTemp = JSON.parse(temp)
+  console.log("parsedTemp:", parsedTemp)
+  const decks = {...parsedTemp};
+return decks;
+
+}
+
 
 function randomizeQuestions(array){
   array.sort(() => Math.random() - 0.5);
@@ -91,7 +125,7 @@ function removeADeck(deckName){
 
 export function _getDecks(){
   return new Promise((res, rej) => {
-    setTimeout(() => res({...decks}), 1000)
+    setTimeout(() => res(getDecks({...decks})), 1000)
   })
 }
 
@@ -111,6 +145,7 @@ export function _getCards(title){
 export function saveDeckTitle(title){
   return new Promise((res, rej) => {
     setTimeout(() => res(addDeck(title)), 1000)
+
   })
 
   //return title;
