@@ -19,6 +19,7 @@ class Home extends Component {
     _getDecks().then((value) => {
       this.setState({val: value,load:true})
     })
+
   }
 
     static navigationOptions = {
@@ -27,7 +28,6 @@ class Home extends Component {
     } // this hides the header for navigation
 
     componentDidMount(){
-
 
       this.willFocusSubscription = this.props.navigation.addListener(
       'willFocus',
