@@ -129,22 +129,26 @@ function removeValueFromArray(array, questionText){
 console.log("questionArray:", array)
 }
 
-function removeACard(deckName, cardQuestion){
+async function removeACard(deckName, cardQuestion){
   console.log("current deck:",decksGlobal)
   removeValueFromArray(decksGlobal[deckName]["questions"], cardQuestion)
   console.log("tried to remove a card!")
+  await AsyncStorage.setItem('decks1', JSON.stringify(decksGlobal));
   return decksGlobal;
 
 }
 
-function addCard(card, deckName){
-    decks[deckName]["questions"].push(card);
+async function addCard(card, deckName){
+    decksGlobal[deckName]["questions"].push(card);
+
+    await AsyncStorage.setItem('decks1', JSON.stringify(decksGlobal));
     return decksGlobal;
 
 }
 
-function removeADeck(deckName){
+async function removeADeck(deckName){
   delete decksGlobal[deckName];
+  await AsyncStorage.setItem('decks1', JSON.stringify(decksGlobal));
   return decksGlobal;
 }
 
