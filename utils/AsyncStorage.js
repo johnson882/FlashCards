@@ -1,68 +1,84 @@
 import {AsyncStorage} from 'react-native';
 
 // next time maybe a array for decks would work better?
-let decks = {
-  React: {
-    title: 'React',
-    questions: [
-      {
-        question: 'What is React?',
-        answer: 'A library for managing user interfaces'
-      },
-      {
-        question: 'Where do you make Ajax requests in React?',
-        answer: 'The componentDidMount lifecycle event'
-      }
-    ]
-  },
-  JavaScript: {
-    title: 'JavaScript',
-    questions: [
-      {
-        question: 'What is a closure?',
-        answer: 'The combination of a function and the lexical environment within which that function was declared.'
-      }
-    ]
-  }
-}
+let firstDeck = {React: {
+  title: 'React',
+  questions: [
+    {
+      question: 'What is React?',
+      answer: 'A library for managing user interfaces'
+    },
+    {
+      question: 'Where do you make Ajax requests in React?',
+      answer: 'The componentDidMount lifecycle event'
+    }
+  ]
+},
+JavaScript: {
+  title: 'JavaScript',
+  questions: [
+    {
+      question: 'What is a closure?',
+      answer: 'The combination of a function and the lexical environment within which that function was declared.'
+    }
+  ]
+}}
+
+let decksGlobal = {}
 
 _storeData = async (decks) => {
   try {
-    await AsyncStorage.setItem('decks', JSON.stringify(decks));
+    let flag = true;
+
+   await AsyncStorage.setItem('decks1', JSON.stringify(decksGlobal));
   } catch (error) {
     // Error saving data
     console.log(error)
   }
 };
 
+_firstTimeSet = async () => {
+  try{
+     AsyncStorage.setItem("firstTime1", JSON.stringify(true));
+  }
+  catch(error){
+    throw error;
+  }
+}
+
 async function addDeck(key){
 
-  
+
   let tempObject = new Object();
   let questionsObject = new Object();
   let titleObject = new Object();
   let merged = new Object();
-  console.log("Decks before add:", decks)
+  console.log("Decks before add:", decksGlobal)
 
   questionsObject["questions"] = []
   titleObject["title"] = key;
   merged = {...titleObject,...questionsObject}
   tempObject[key] = merged
+  //let FirstTime = null
 
-  decks = {...decks, ...tempObject};
-    console.log("Saved Item to Storage!", decks)
-await _storeData(decks);
+
+
+  //await _firstTimeSet();
+
+  decksGlobal = {...decksGlobal, ...tempObject};
+    console.log("Saved Item to Storage!", decksGlobal)
+await _storeData(decksGlobal);
 
 //await AsyncStorage.setItem('decks', JSON.stringify(decks));
 
 
-  return decks;
+  return decksGlobal;
 }
 
 async function getDecks(key){
 console.log("Param for getDecks:", key)
 
-  const temp  = await AsyncStorage.getItem('decks');
+  const temp  = await AsyncStorage.getItem('decks1');
 //  let firstTime= await AsyncStorage.getItem('count');;
 
 
@@ -71,8 +87,24 @@ console.log("Param for getDecks:", key)
 
   parsedTemp = JSON.parse(temp)
   console.log("parsedTemp:", parsedTemp)
-  const decks = {...parsedTemp};
-return decks;
+
+
+  const FirstTime = await AsyncStorage.getItem('firstTime22'); // if doesnt exist returns null change firstTimexx
+  // each time before testing - can also use AsyncStorage.clear() // this would be better
+
+  if(JSON.parse(FirstTime) == null || FirstTime === 'null')
+  {
+console.log("firstTime =", FirstTime);
+  await AsyncStorage.setItem('firstTime22', "true");
+
+  decksGlobal = firstDeck
+  console.log("Decks First time:", decksGlobal)
+    await AsyncStorage.setItem('decks1', JSON.stringify(firstDeck));
+  return firstDeck;
+  }
+
+//const decks = {...decksGlobal, ...parsedTemp};
+return decksGlobal = {...decksGlobal, ...parsedTemp};
 
 }
 
@@ -98,22 +130,22 @@ console.log("questionArray:", array)
 }
 
 function removeACard(deckName, cardQuestion){
-  console.log("current deck:",decks)
-  removeValueFromArray(decks[deckName]["questions"], cardQuestion)
+  console.log("current deck:",decksGlobal)
+  removeValueFromArray(decksGlobal[deckName]["questions"], cardQuestion)
   console.log("tried to remove a card!")
-  return decks;
+  return decksGlobal;
 
 }
 
 function addCard(card, deckName){
     decks[deckName]["questions"].push(card);
-    return decks;
+    return decksGlobal;
 
 }
 
 function removeADeck(deckName){
-  delete decks[deckName];
-  return decks;
+  delete decksGlobal[deckName];
+  return decksGlobal;
 }
 
 
@@ -125,19 +157,19 @@ function removeADeck(deckName){
 
 export function _getDecks(){
   return new Promise((res, rej) => {
-    setTimeout(() => res(getDecks({...decks})), 1000)
+    setTimeout(() => res(getDecks({...decksGlobal})), 1000)
   })
 }
 
 export function _getDeck(title){
   return new Promise((res, rej) => {
-    setTimeout(() => res({...decks[title]}), 1000)
+    setTimeout(() => res({...decksGlobal[title]}), 1000)
   })
 }
 
 export function _getCards(title){
   return new Promise((res, rej) => {
-    setTimeout(() => res(randomizeQuestions(decks[title].questions)), 1000)
+    setTimeout(() => res(randomizeQuestions(decksGlobal[title].questions)), 1000)
   })
 
 }
@@ -170,5 +202,5 @@ export function removeCard(deckName, cardQuestion){
   return new Promise((res,rej) => {
     setTimeout(() => res((removeACard(deckName, cardQuestion)), 1000 ) )
   })
-  return decks;
+  return decksGlobal;
 }

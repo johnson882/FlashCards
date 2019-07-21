@@ -16,9 +16,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {val:"", load:false};
-    _getDecks().then((value) => {
-      this.setState({val: value,load:true})
-    })
+
 
   }
 
@@ -28,7 +26,9 @@ class Home extends Component {
     } // this hides the header for navigation
 
     componentDidMount(){
-
+      _getDecks().then((value) => {
+        this.setState({val: value,load:true})
+      })
       this.willFocusSubscription = this.props.navigation.addListener(
       'willFocus',
       () => {
