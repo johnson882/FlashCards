@@ -6,121 +6,60 @@ import {
     Button
 
 } from "react-native";
-
 import CardQA from './CardQA'
-
 import {_getCards} from "../utils/AsyncStorage"
-
 
 class Card extends Component {
 
-constructor(props){
-super(props);
-this.state = {"Questions":0, "loaded":false, "index": 0, "deckName":"", "finalQuestion":false, "randomArray":[], "initArray":false};
-console.log("constructor Called!")
-//let { navigation } = null;
-//let itemId = null;
-//this.handler = this.handler.bind(this)
+  constructor(props){
+    super(props);
+    this.state = {"Questions":0, "loaded":false, "index": 0, "deckName":"", "finalQuestion":false, "randomArray":[],
+     "initArray":false};
+   }
 
-}
+   handler(index){
+     let aindex = ++index;
+     this.setState({"index": aindex})
+     return index;
+   }
 
-r
-
-handler(index){
-
-
-  let aindex = ++index;
-  this.setState({"index": aindex})
-  console.log("index:", this.state.index)
-  return index;
-}
     static navigationOptions = {
       title: "Card 1"
-
-    } // this hides the header for navigation
+    }
 
     componentDidMount(){
-
       let theProps = this.props.navigation.getParam('deckName');
-      let valueQuestions;
 
       _getCards(theProps).then((value) => {
           this.setState({"Questions":value,"loaded":true})
-
       })
-
-
-
-
     }
-
-
-
-
 
     render() {
+      let questionsArrayLength = this.state.Questions.length;
+      let stateIndex = this.state.index;
+      let loaded = this.state.loaded;
+      let ifLoad;
 
-
-      let question = [];
-      let answer = [];
-      let arrayLength = 0;
-      let stateIndex = 0;
-      let loaded = false;
-
-
-
-
-
-
-      //let question = this.state.Questions[0].question
-      if(this.state.loaded == true)
+      if (stateIndex < questionsArrayLength && loaded == true && this.state.finalQuestion == false)
       {
-        arrayLength = this.state.Questions.length;
+        ifLoad = <CardQA index={stateIndex} arrayLength={questionsArrayLength} handler={this.handler.bind(this)} question={this.state.Questions[stateIndex].question} answer={this.state.Questions[stateIndex].answer} />
+      }
+      else if(stateIndex >= questionsArrayLength && loaded == true && this.state.finalQuestion == false ){
+        ifLoad =  <Text> QUIZ FININISHED</Text> ;
+      }
+      else{
+        ifLoad = <Text> Waiting for data...</Text>;
+      }
 
-        for (var i = 0; i < arrayLength; i++) {
-          question[i] = this.state.Questions[i].question
-          answer[i] = this.state.Questions[i].answer
-        }
-
-      console.log("answer:",answer)
-      console.log("question:",question)
-      stateIndex = this.state.index;
-      loaded = this.state.loaded
-
-      console.log("loaded:", loaded)
-
-    }
-    let handler = this.handler
-    console.log("index in render:",this.state.index)
-
-    let ifLoad;
-
-    if (stateIndex < arrayLength && loaded == true && this.state.finalQuestion == false)
-    {
-      ifLoad = <CardQA index={stateIndex} arrayLength={arrayLength} handler={handler.bind(this)} question={question[stateIndex]} answer={answer[stateIndex]} />
-
-    }
-     else if(stateIndex >= arrayLength && loaded == true && this.state.finalQuestion == false ){
-        ifLoad =  <Text> QUIZ FININISHED </Text> ;
-    }
-    else{
-      ifLoad = <Text> Waiting for data...</Text>;
-    }
-        return (
-
-
+      return (
             <View style={styles.container}>
             {ifLoad}
-
-
-
-
-
-
             </View>
         );
     }
 }
+
 export default Card;
 
 const styles = StyleSheet.create({
